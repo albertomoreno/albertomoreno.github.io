@@ -1,0 +1,22 @@
+{
+  "name": "albertomoreno.github.io",
+  "version": "1.0.0",
+  "description": "personal website",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/albertomoreno/albertomoreno.github.io.git"
+  },
+  "author": "Alberto Moreno",
+  "bugs": {
+    "url": "https://github.com/albertomoreno/albertomoreno.github.io/issues"
+  },
+  "homepage": "https://github.com/albertomoreno/albertomoreno.github.io",
+  "dependencies": {
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-livereload": "^4.0.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-watch": "^5.0.1"
+  }
+}
