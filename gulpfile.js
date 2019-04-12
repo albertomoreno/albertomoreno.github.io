@@ -1,6 +1,15 @@
 
-const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
+const gulp = require('gulp'),
+      $ = require('gulp-load-plugins')(),
+      express = require('express'),
+      app = express();
+
+
+function serve() {
+  app.use(express.static('.'));
+  app.listen(8080);
+  console.log('Listening on port: 8080');
+}
 
 
 function livereload() {
@@ -48,5 +57,5 @@ function watchStyles(folder) {
 exports.dev = gulp.series(
   watchStyles('design'),
   watchStyles('libs'),
-  livereload,
+  gulp.parallel(serve, livereload),
 );
