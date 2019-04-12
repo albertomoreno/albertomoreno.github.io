@@ -11,7 +11,7 @@
     "url": "https://github.com/albertomoreno/albertomoreno.github.io/issues"
   },
   "homepage": "https://github.com/albertomoreno/albertomoreno.github.io",
-  "dependencies": {
+  "devDependencies": {
     "express": "^4.16.4",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
