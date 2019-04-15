@@ -1,6 +1,7 @@
 
 const gulp = require('gulp'),
       $ = require('gulp-load-plugins')(),
+      uglify = require('gulp-uglify'),
       express = require('express'),
       app = express();
 
@@ -24,6 +25,19 @@ function livereload() {
 }
 
 
+function buildScripts() {
+  let files = [
+    'node_modules/jquery/dist/jquery.js',
+    'node_modules/popper.js/dist/umd/popper.js',
+    'node_modules/bootstrap/dist/js/bootstrap.js',
+  ];
+  return gulp.src(files)
+    .pipe($.concat('vendor.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('static/scripts'))
+}
+
+
 function watchStyles(folder) {
   return function watchStyles() {
     var files = [
@@ -37,9 +51,9 @@ function watchStyles(folder) {
           precision: 10,
           includePaths: [
             'assets/styles',  // _variables.scss & other global files
-            '../..',  // node_modules libs
+            './',  // node_modules libs
           ],
-          outputStyle: 'expanded',
+          outputStyle: 'compressed', // compressed or expanded
           sourceComments: true,
         }).on('error', $.sass.logError))
         .pipe($.autoprefixer({browsers: ['last 3 versions', 'not ie < 11']}))
@@ -57,5 +71,6 @@ function watchStyles(folder) {
 exports.dev = gulp.series(
   watchStyles('design'),
   watchStyles('libs'),
+  buildScripts,
   gulp.parallel(serve, livereload),
 );
