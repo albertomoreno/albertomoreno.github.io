@@ -1,0 +1,25 @@
+
+.navbar {
+  background-color: $navbar-color;
+  box-shadow: 0 0 10px darken($navbar-color, 15%);
+
+  .logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .menu {
+    .menu-item {
+      padding-left: 10px;
+      padding-right: 10px;
+
+      a {
+        transition: all .4s ease;
+        
+        &:hover {
+          color: white;
+        } 
+      }
+    }
+  }
+}
