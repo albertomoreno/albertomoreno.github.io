@@ -68,9 +68,19 @@ function watchStyles(folder) {
 };
 
 
+function fonts() {
+  let files = [
+    'node_modules/@fortawesome/fontawesome-free/webfonts/*',
+  ];
+  return gulp.src(files)
+    .pipe(gulp.dest('static/fonts'));
+}
+
+
 exports.dev = gulp.series(
   watchStyles('design'),
   watchStyles('libs'),
   buildScripts,
+  fonts,
   gulp.parallel(serve, livereload),
 );

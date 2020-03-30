@@ -1,8 +1,50 @@
 
+body {
+  font-family: Roboto, monospace;
+}
+
 .layout {
   margin-top: $navbar-height;
 
-  .carousel img {
-    max-height: 700px;
+  .carousel {
+    img {
+      max-height: 700px;
+    }
+
+    .carousel-box {
+      background-color: rgba($navbar-color, .8);
+      position: absolute;
+      width: 30%;
+      height: 80%;
+      z-index: 1020;
+      right: 10%;
+      top: 10%;
+
+      .info {
+        text-align: center;
+        color: #fefefe;
+
+        h1 {
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+
+        .links a {
+          color: white;
+        }
+      }
+
+      .avatar {
+        margin-top: 40px;
+        margin-bottom: 30px;
+        width: 100%;
+
+        img {
+          width: 40%;
+          border-radius: 50%;
+          border: 2px solid $navbar-color;
+        }
+      } 
+    }
   }
 }
