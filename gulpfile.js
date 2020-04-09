@@ -1,7 +1,6 @@
 
 const gulp = require('gulp'),
       $ = require('gulp-load-plugins')(),
-      uglify = require('gulp-uglify'),
       express = require('express'),
       app = express();
 
@@ -25,49 +24,6 @@ function livereload() {
 }
 
 
-function buildScripts() {
-  let files = [
-    'node_modules/jquery/dist/jquery.js',
-    'node_modules/popper.js/dist/umd/popper.js',
-    'node_modules/bootstrap/dist/js/bootstrap.js',
-  ];
-  return gulp.src(files)
-    .pipe($.concat('vendor.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('static/scripts'))
-}
-
-
-function watchStyles(folder) {
-  return function watchStyles() {
-    var files = [
-      'assets/styles/_variables.scss',
-      `assets/styles/${folder}/**/*.scss`,
-    ];
-
-    function buildStyles() {
-      return gulp.src(files)
-        .pipe($.sass({
-          precision: 10,
-          includePaths: [
-            'assets/styles',  // _variables.scss & other global files
-            './',  // node_modules libs
-          ],
-          outputStyle: 'compressed', // compressed or expanded
-          sourceComments: true,
-        }).on('error', $.sass.logError))
-        .pipe($.autoprefixer({browsers: ['last 3 versions', 'not ie < 11']}))
-        .pipe(gulp.dest(`static/styles/${folder}`))
-        .pipe($.livereload());
-    };
-    
-    $.watch(files, buildStyles);
-
-    return buildStyles();
-  };
-};
-
-
 function fonts() {
   let files = [
     'node_modules/@fortawesome/fontawesome-free/webfonts/*',
@@ -77,10 +33,7 @@ function fonts() {
 }
 
 
-exports.dev = gulp.series(
-  watchStyles('design'),
-  watchStyles('libs'),
-  buildScripts,
+exports.serve = gulp.series(
   fonts,
   gulp.parallel(serve, livereload),
 );
