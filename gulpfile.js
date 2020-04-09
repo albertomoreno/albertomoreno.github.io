@@ -33,7 +33,25 @@ function fonts() {
 }
 
 
+function watchStyles() {
+  let files = [
+    'styles/main.css',
+  ];
+  return gulp.watch(files, {ignoreInitial: false}, function styles() {
+    return gulp.src('styles/main.css')
+      .pipe($.postcss([
+        require('postcss-import')({
+          path: ['.'],
+        }),
+        require('tailwindcss'),
+        require('autoprefixer'),
+      ]))
+      .pipe(gulp.dest('static/styles'));
+  });
+}
+
+
 exports.serve = gulp.series(
   fonts,
-  gulp.parallel(serve, livereload),
+  gulp.parallel(watchStyles, serve, livereload),
 );
